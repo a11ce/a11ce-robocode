@@ -19,6 +19,9 @@ public class Windsor_1224 extends AdvancedRobot
 	Random satan = new Random();
 
 	public void run() {
+
+		setAdjustGunForRobotTurn(true);
+		setAdjustRadarForGunTurn(true);
 		
 		nextMove = getLoc();
 
@@ -28,11 +31,11 @@ public class Windsor_1224 extends AdvancedRobot
 					new Color(42, 128, 154)
 				); // body,gun,radar
 
-		
+		setTurnRadarRight(Double.POSITIVE_INFINITY);
 		while(true) {
 		
 			System.out.println(nextMove);
-
+            scan();
 			doMove();
 			execute();
 		}
@@ -84,6 +87,10 @@ public class Windsor_1224 extends AdvancedRobot
 		return bearing;
 	}
 
-	
+	public void onScannedRobot(ScannedRobotEvent e)
+	{
+	    double radarTurn = getHeading() + e.getBearing() - getRadarHeading();
+	    setTurnRadarRight(normalizeBearing(radarTurn));
+	}
 
 }
