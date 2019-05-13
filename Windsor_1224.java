@@ -90,7 +90,7 @@ public class Windsor_1224 extends AdvancedRobot
 	public void onScannedRobot(ScannedRobotEvent e)
 	{
 	    double radarTurn = getHeading() + e.getBearing() - getRadarHeading();
-	    setTurnRadarRight(normalizeBearing(radarTurn));
+	    setTurnRadarRight(1.9 * normalizeBearing(radarTurn));
 	}
 
 }
