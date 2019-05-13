@@ -32,7 +32,7 @@ public class Windsor_1224 extends AdvancedRobot
 		while(true) {
 		
 			System.out.println(nextMove);
-			setTurnRight(100);
+
 			doMove();
 			execute();
 		}
@@ -83,5 +83,7 @@ public class Windsor_1224 extends AdvancedRobot
 		
 		return bearing;
 	}
+
+	
 
 }
