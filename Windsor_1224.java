@@ -1,6 +1,7 @@
 package a11ce;
 import robocode.*;
 import robocode.BattleRules.*;
+import robocode.util.Utils;
 
 import java.awt.Point;
 import java.util.Random;
@@ -12,7 +13,8 @@ public class Windsor_1224 extends AdvancedRobot
 {
 
     private Point nextMove;
-	private int GRID_RANGE = 200;	
+	private int GRID_RANGE = 200;
+	private int SAFE_EDGE = 100;
 
 	Random satan = new Random();
 
@@ -49,8 +51,8 @@ public class Windsor_1224 extends AdvancedRobot
 			nextMove = new Point(   (int) getX() + (satan.nextInt(GRID_RANGE*2) - GRID_RANGE),
 									(int) getY() + (satan.nextInt(GRID_RANGE*2) - GRID_RANGE)
 								);
-			} while(nextMove.getX() < 0 || nextMove.getX() > getBattlefieldWidth ()
-				||  nextMove.getY() < 0 || nextMove.getY() > getBattlefieldHeight()
+			} while(nextMove.getX() < SAFE_EDGE || nextMove.getX() > (getBattleFieldWidth () - SAFE_EDGE)
+				||  nextMove.getY() < SAFE_EDGE || nextMove.getY() > (getBattleFieldHeight() - SAFE_EDGE)
 				);
 		}
         double absDeg = absoluteBearing(getLoc(), nextMove);
