@@ -15,6 +15,7 @@ public class Windsor_1224 extends AdvancedRobot
     private Point nextMove;
 	private int GRID_RANGE = 200;
 	private int SAFE_EDGE = 100;
+    private double enemyRange = 10000;
 
 	Random satan = new Random();
 
@@ -37,6 +38,7 @@ public class Windsor_1224 extends AdvancedRobot
 			System.out.println(nextMove);
             scan();
 			doMove();
+			doFire();
 			execute();
 		}
 	}
@@ -89,8 +91,17 @@ public class Windsor_1224 extends AdvancedRobot
 
 	public void onScannedRobot(ScannedRobotEvent e)
 	{
+	    enemyRange = e.getDistance();
 	    double radarTurn = getHeading() + e.getBearing() - getRadarHeading();
+	    double gunTurn   = getHeading() + e.getBearing() - getGunHeading();
+	    setTurnGunRight(normalizeBearing(gunTurn));
 	    setTurnRadarRight(1.9 * normalizeBearing(radarTurn));
+	}
+
+	public void doFire()
+	{
+	    double firePower = Math.min(500 / enemyRange, 3);
+	    setFire(firePower);
 	}
 
 }
